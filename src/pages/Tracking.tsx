@@ -169,24 +169,35 @@ export default function Tracking() {
             value={trackingNumber}
             onChange={(event) => setTrackingNumber(event.target.value)}
             placeholder="Ex: SH-001"
+            autoComplete="off"
             className="flex-1 border border-slate-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
           />
           <button
             type="submit"
-            disabled={isLoading}
-            className="px-5 py-2 bg-purple-600 text-white text-sm font-medium rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-70"
+            disabled={isLoading || trackingNumber.trim() === ''}
+            className="px-5 py-2 bg-purple-600 text-white text-sm font-medium rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-70 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2"
           >
-            {isLoading ? 'Recherche...' : 'Rechercher'}
+            {isLoading ? (
+              <>
+                <span className="w-4 h-4 border-2 border-white/50 border-t-white rounded-full animate-spin" />
+                Recherche...
+              </>
+            ) : (
+              'Rechercher'
+            )}
           </button>
         </div>
+        <p className="text-xs text-slate-500 mt-2">Astuce: appuyez sur Entrée pour lancer rapidement la recherche.</p>
       </form>
 
       {queryError ? (
-        <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl p-4 text-sm">{queryError}</div>
+        <div role="status" className="bg-red-50 border border-red-200 text-red-700 rounded-xl p-4 text-sm">
+          {queryError}
+        </div>
       ) : null}
 
       {hasSearched && !isLoading && !shipment && !queryError ? (
-        <div className="bg-white rounded-xl border border-slate-200 p-6 text-sm text-slate-600">
+        <div role="status" className="bg-white rounded-xl border border-slate-200 p-6 text-sm text-slate-600">
           Aucune expédition trouvée avec ce numéro.
         </div>
       ) : null}
