@@ -1,30 +1,32 @@
 import { createBrowserRouter } from 'react-router'
 import MainLayout from '../layouts/MainLayout'
-import HomePage from '../pages/HomePage'
-import LoginPage from '../pages/LoginPage'
-import DashboardPage from '../pages/DashboardPage'
-import NotFoundPage from '../pages/NotFoundPage'
-import Clients from '../pages/Clients'
+import Home from '../pages/Home'
+import Login from '../pages/Login'
+import Register from '../pages/Register'
+import Dashboard from '../pages/Dashboard'
 import Shipments from '../pages/Shipments'
 import Tracking from '../pages/Tracking'
+import Clients from '../pages/Clients'
 import Drivers from '../pages/Drivers'
 import Settings from '../pages/Settings'
+import NotFoundPage from '../pages/NotFoundPage'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <MainLayout />,
     children: [
-      { index: true, element: <HomePage /> },
-      { path: 'login', element: <LoginPage /> },
-      { path: 'dashboard', element: <DashboardPage /> },
-      { path: 'clients', element: <Clients /> },
+      { index: true, element: <Home /> },
+      { path: 'dashboard', element: <Dashboard /> },
       { path: 'shipments', element: <Shipments /> },
       { path: 'tracking', element: <Tracking /> },
+      { path: 'clients', element: <Clients /> },
       { path: 'drivers', element: <Drivers /> },
       { path: 'settings', element: <Settings /> },
     ],
   },
+  { path: 'login', element: <Login /> },
+  { path: 'register', element: <Register /> },
   { path: '*', element: <NotFoundPage /> },
 ])
 
