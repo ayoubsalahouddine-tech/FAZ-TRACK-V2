@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 
+type Client = {
+  id: number | string;
+  nom: string | null;
+  telephone: string | null;
+};
+
 export default function Clients() {
-  const [clients, setClients] = useState<any[]>([]);
+  const [clients, setClients] = useState<Client[]>([]);
 
   useEffect(() => {
     loadClients();
@@ -16,7 +22,7 @@ export default function Clients() {
     if (error) {
       console.error(error);
     } else {
-      setClients(data || []);
+      setClients((data as Client[]) || []);
     }
   }
 
